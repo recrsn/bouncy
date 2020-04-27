@@ -1,28 +1,18 @@
-import 'phaser';
+import "phaser";
 
-export default class Demo extends Phaser.Scene
-{
-    constructor ()
-    {
-        super('demo');
-    }
+import Intro from './intro';
 
-    preload ()
-    {
-
-    }
-
-    create ()
-    {
-    }
-}
-
-const config = {
-    type: Phaser.AUTO,
-    backgroundColor: '#125555',
-    width: 800,
-    height: 600,
-    scene: Demo
-};
-
-const game = new Phaser.Game(config);
+const game = new Phaser.Game({
+  type: Phaser.AUTO,
+  backgroundColor: "#000000",
+  width: 1200,
+  height: 720,
+  scene: Intro,
+  physics: {
+    default: "arcade",
+    arcade: {
+      gravity: { y: 300 },
+      debug: false,
+    },
+  },
+});
