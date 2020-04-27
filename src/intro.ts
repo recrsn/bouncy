@@ -16,6 +16,9 @@ export default class Intro extends Phaser.Scene {
     });
     this.load.image("ground", "assets/ground.png");
     this.load.image("grass", "assets/grass.png");
+    this.load.audio("bounce", "assets/bounce.mp3", {
+      instances: 1,
+    });
   }
 
   create() {
@@ -35,7 +38,11 @@ export default class Intro extends Phaser.Scene {
     this.ball.setBounce(0.6);
     this.ball.setCollideWorldBounds(true);
 
-    this.physics.add.collider(this.ball, platforms);
+    this.physics.add.collider(this.ball, platforms, () => {
+      if (this.ball.body.wasTouching.none) {
+        this.sound.play("bounce");
+      }
+    });
 
     this.anims.create({
       key: "left",
